@@ -25,25 +25,28 @@ class Map
 		std::vector<Country> getWorldMap();
 
 		/* Get more information about a country */
-		Country get(int id);
+		Country get(std::string countryName);
 
-		/* Are two countries adjacent */
+		/* Two countries adjacent */
 		bool isAdjacent(std::string countryX, std::string countryY);
 
+		/* Two continents adjacent */
+		bool areContinentsAdjacent(std::string continentX, std::string continentY);
+
 		/* Add country to worldmap */
-		void addCountry(int id, std::string name, std::string continent);
+		void addCountry(int id, std::string countryName, std::string continent);
 
 		/* Add adjacency between two countries */
 		void addAdjacency(std::string countryX, std::vector<std::string> adjCountries);
 
 		/* Get id of a country */
-		int getIdOfCountry(std::string name);
+		int getIdOfCountry(std::string countryName);
 
 		/* Assign player to country */
-		void addPlayerToCountry(std::string country, std::string player);
+		void addPlayerToCountry(std::string countryName, std::string playerName);
 
 		/* Assign armies to country */
-		void addArmiesToCountry(std::string country, std::string armies);
+		void addArmiesToCountry(std::string countryName, std::string armies);
 
 	protected:
 		/* Matrix to hold each country's adjacency */

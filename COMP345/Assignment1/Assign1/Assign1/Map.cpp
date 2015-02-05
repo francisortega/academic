@@ -148,8 +148,8 @@ Map::~Map() {
 std::vector<Map::Country> Map::getCountriesOfContinents(std::string continent) {
 	std::vector<Map::Country> countriesOfContinents;
 
-	for (std::vector<int>::size_type i = 0; i < countries.size(); i++) {
-		if (countries[i].continent.compare(continent)) {
+	for (int i = 0; i < countries.size(); i++) {
+		if (countries[i].continent.compare(continent) == 0) {
 			countriesOfContinents.push_back(countries[i]);
 		}
 	}
@@ -161,9 +161,11 @@ std::vector<Map::Country> Map::getWorldMap() {
 	return countries;
 }
 
-Map::Country Map::get(int id) {
-	for (std::vector<int>::size_type i = 0; i < countries.size(); i++) {
-		if (countries[i].id == id) {
+Map::Country Map::get(std::string countryName) {
+	int idc = getIdOfCountry(countryName);
+
+	for (int i = 0; i < countries.size(); i++) {
+		if (countries[i].id == idc) {
 			return countries[i];
 		}
 	}
@@ -176,11 +178,15 @@ bool Map::isAdjacent(std::string countryX, std::string countryY) {
 	return (adjacentCountries[countryIdX][countryIdY] == 1 || adjacentCountries[countryIdY][countryIdX] == 1) ? true : false;
 }
 
-void Map::addCountry(int id, std::string name, std::string continent) {
+bool areContinentsAdjacent(std::string continentX, std::string continentY) {
+	return false;
+}
+
+void Map::addCountry(int id, std::string countryName, std::string continent) {
 	
 	/* Add country information */
 	countryInfo.id = id; // index in the vector array
-	countryInfo.name = name;
+	countryInfo.name = countryName;
 	countryInfo.continent = continent;
 
 	/* Add to list of countries */
@@ -207,15 +213,24 @@ void Map::addAdjacency(std::string countryX, std::vector<std::string> adjCountri
 /**
  * getIdOfCountry
  */
-int Map::getIdOfCountry(std::string name) {
+int Map::getIdOfCountry(std::string countryName) {
 	int idc = 0;
 
 	// Loop entire country list to find for the id
 	for (std::vector<int>::size_type i = 0; i < countries.size(); i++) {
-		if (countries[i].name.compare(name.c_str()) == 0) {
+		if (countries[i].name.compare(countryName.c_str()) == 0) {
 			idc = countries[i].id;
 		}
 	}
 
 	return idc;
+}
+
+void Map::addPlayerToCountry(std::string countryName, std::string playerName) {
+	// Loop entire country list to find for the id
+	for (std::vector<int>::size_type i = 0; i < countries.size(); i++) {
+		if (countries[i].name.compare(countryName.c_str()) == 0) {
+			countries[i].player = playerName;
+		}
+	}
 }
