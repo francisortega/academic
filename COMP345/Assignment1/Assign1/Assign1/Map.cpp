@@ -179,7 +179,12 @@ bool Map::isAdjacent(std::string countryX, std::string countryY) {
 }
 
 bool areContinentsAdjacent(std::string continentX, std::string continentY) {
+
 	return false;
+}
+
+std::vector<std::string> getAdjacentCountries(std::string countryName) {
+
 }
 
 void Map::addCountry(int id, std::string countryName, std::string continent) {
